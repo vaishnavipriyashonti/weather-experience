@@ -1,0 +1,48 @@
+#%RAML 1.0
+title: weather-experience
+version: 1.0
+description: This API accepts the ipaddress as input and provides the weather details to the user.
+
+traits:
+  client-id-required:
+    headers:
+      client_id:
+        type: string
+      client_secret:
+        type: string
+    responses:
+      401:
+        description: Unauthorized or invalid client application credentials
+      500:
+        description: Bad response from authorization server, or WSDL SOAP Fault error
+
+/weather:
+ get:
+  is: [client-id-required]
+  description: Retrieves weather details based on the ip address
+  queryParameters:
+   ipaddress:
+    required: true
+    type: string
+    pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+  responses:
+   200:
+    body:
+     application/json:
+      example:
+   400:
+    body:
+     application/json:
+      example:
+   519:
+    body:
+     application/json:
+      example:
+   523:
+    body:
+     application/json:
+      example:
+    
+       
+
+    
